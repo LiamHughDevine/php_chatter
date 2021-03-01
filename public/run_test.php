@@ -1,7 +1,13 @@
 <?php
 include 'data_retrieval.php';
 
-$u = new User(3);
-echo $u->GetName();
+try {
+    $u = new User(1);
+    echo $u->GetUserName();
+}
+catch (UserNotFound $e)
+{
+    echo "error";
+}
 
 ?>

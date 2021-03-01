@@ -14,13 +14,11 @@ function retrieve_user($id)
 {
     $mysqli = new mysqli("localhost", "root", "", "chatter");
     $mdb = mdb_connection_test();
-    //$user_data = mysqli_query( $mdb, "SELECT username, password, last_online, status, admin FROM user WHERE id = $id", MYSQLI_USE_RESULT);
     mdb_disconect($mdb);
     $sql = "SELECT username, password, last_online, status, admin FROM user WHERE id = $id";
     $selectQuery = $mysqli->prepare($sql);
     $selectQuery->execute();
-    $selectQueryResult = $selectQuery->get_result();
-    return $selectQueryResult;
+    return $selectQuery->get_result();
 }
 
 function add_chat_room($name)
@@ -30,6 +28,17 @@ function add_chat_room($name)
     $sql = "INSERT INTO chat_room (name, pin) VALUES ('$name', '$pin')";
     $mdb->query($sql);
     mdb_disconect($mdb);
+}
+
+function retrieve_chat_room($id)
+{
+    $mysqli = new mysqli("localhost", "root", "", "chatter");
+    $mdb = mdb_connection_test();
+    mdb_disconect($mdb);
+    $sql = "SELECT id, name, pin FROM chat_room WHERE id = $id";
+    $selectQuery = $mysqli->prepare($sql);
+    $selectQuery->execute();
+    return $selectQuery->get_result();
 }
 
 function add_chat_user($user_id, $chat_room_id, $privileges)
@@ -48,12 +57,34 @@ function add_message($user_id, $chat_room_id, $message_text)
     mdb_disconect($mdb);
 }
 
+function retrieve_message($id)
+{
+    $mysqli = new mysqli("localhost", "root", "", "chatter");
+    $mdb = mdb_connection_test();
+    mdb_disconect($mdb);
+    $sql = "SELECT id, user_id, chat_room_id, message_text, time_stamp FROM message WHERE id = $id";
+    $selectQuery = $mysqli->prepare($sql);
+    $selectQuery->execute();
+    return $selectQuery->get_result();
+}
+
 function add_attachment($message_id, $path)
 {
     $mdb = mdb_connection_test();
     $sql = "INSERT INTO attachment (message_id, path) VALUES ('$message_id', '$path')";
     $mdb->query($sql);
     mdb_disconect($mdb);
+}
+
+function retrieve_attachment($id)
+{
+    $mysqli = new mysqli("localhost", "root", "", "chatter");
+    $mdb = mdb_connection_test();
+    mdb_disconect($mdb);
+    $sql = "SELECT id, message_id, path FROM attachment WHERE id = $id";
+    $selectQuery = $mysqli->prepare($sql);
+    $selectQuery->execute();
+    return $selectQuery->get_result();
 }
 
 ?>
