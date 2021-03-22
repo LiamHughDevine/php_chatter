@@ -159,7 +159,6 @@ class user extends chatter_db
 
         foreach ($chat_rooms as &$chat_room)
         {
-            if ()
         }
 
         return
