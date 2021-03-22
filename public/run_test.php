@@ -2,12 +2,16 @@
 include 'data_retrieval.php';
 
 try {
-    $u = new User(1);
-    echo $u->GetUserName();
+    $c = new chat_room(1);
+    $u = new user(7);
+    $c->delete($u);
+    echo "Success";
 }
-catch (UserNotFound $e)
+catch (Exception $e)
 {
-    echo "error";
+    echo "Error:";
+    echo "<br>";
+    echo $e;
 }
 
 ?>

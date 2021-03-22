@@ -14,8 +14,7 @@ function mdb_connection_test()
     $server_name = "localhost";
     $username = "root";
     $password = "";
-    $database = "chatter";
-
+    $database = "chatter_test";
     return mysqli_connect($server_name, $username, $password, $database);
 }
 
